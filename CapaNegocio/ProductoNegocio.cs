@@ -14,8 +14,10 @@ namespace CapaNegocio
 
         public List<Producto> ListarPorNombre(string nombre)
         {
-            // Llama al método de datos que lista por nombre
-            return productoDatos.ListarPorNombre(nombre);
+            
+            return productoDatos.Listar()
+                                .Where(p => p.Name.Contains(nombre, StringComparison.OrdinalIgnoreCase))
+                                .ToList();
         }
     }
 }

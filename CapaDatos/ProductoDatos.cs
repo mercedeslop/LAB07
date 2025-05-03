@@ -30,40 +30,12 @@ namespace CapaDatos
                         Name = dr["name"].ToString(),
                         Price = Convert.ToDecimal(dr["price"]),
                         Stock = Convert.ToInt32(dr["stock"]),
-                        Active = Convert.ToBoolean(dr["active"])
+                        
                     });
                 }
             }
             return lista;
         }
-
-        public List<Producto> ListarPorNombre(string nombre)
-        {
-            List<Producto> lista = new List<Producto>();
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand("sp_listar_productos_por_nombre", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@nombre", nombre);
-                conn.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    lista.Add(new Producto
-                    {
-                        ProductId = Convert.ToInt32(dr["product_id"]),
-                        Name = dr["name"].ToString(),
-                        Price = Convert.ToDecimal(dr["price"]),
-                        Stock = Convert.ToInt32(dr["stock"]),
-                        Active = Convert.ToBoolean(dr["active"])
-                    });
-                }
-            }
-            return lista;
-        }
-
-
-
 
     }
 }
